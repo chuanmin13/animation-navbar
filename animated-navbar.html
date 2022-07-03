@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Animated Navigation-bar</title>
+
+        <style>
+            body {
+                margin: 0;
+                height: 800px;
+            }
+            .nav-container {
+                width: 100%;
+                height: 60px;
+                margin: auto;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                background-color: #eee;
+            }
+            .navBar {
+                width: 100%;
+                position: fixed;
+                top: 0;
+                z-index: -1;
+            }
+
+            .logo {
+                margin: 0 20px;
+                font-size: 22px;
+            }
+            .hamburger {
+                width: 40px;
+                height: 40px;
+                margin: 10px 20px;
+                position: fixed;
+                top: 0;
+                right: 0;
+                z-index: 9;
+            }
+            .line1,
+            .line2,
+            .line3 {
+                width: 100%;
+                height: 5px;
+                border-radius: 5px;
+                /* background-color: rgb(202, 65, 103); */
+                background-color: #222;
+                position: absolute;
+            }
+            .line1 {
+                top: 11px;
+                transition: 0.5s;
+            }
+
+            .line2 {
+                top: 20px;
+                transition: 0.7s ease;
+            }
+
+            .line3 {
+                top: 29px;
+                transition: 0.5s;
+            }
+
+            .hamburger.toggle .line1 {
+                transform: rotate(-45deg) translate(-6px, 6px);
+                background-color: #fff;
+            }
+            .hamburger.toggle .line3 {
+                transform: rotate(45deg) translate(-6px, -6px);
+                background-color: #fff;
+            }
+            .hamburger.toggle .line2 {
+                width: 0;
+                background-color: #fff;
+            }
+            ul.nav-links {
+                list-style: none;
+                clip-path: circle(0px at 92% 5%);
+                width: 100%;
+                height: 500px;
+                background-color: rgb(202, 65, 103);
+                margin: 0;
+                display: flex;
+                flex-direction: column;
+                justify-content: start;
+                align-items: center;
+                gap: 60px;
+                padding: 60px 0;
+                transition: 1s;
+            }
+            ul.nav-links.open {
+                clip-path: circle(1000px at 92% 5%);
+                -webkit-clip-path: circle(1000px at 92% 5%);
+                pointer-events: all;
+            }
+
+            .nav-links li {
+                font-size: 24px;
+                color: #fff;
+                font-family: Verdana, Geneva, Tahoma, sans-serif;
+                transition: 2.5s;
+                opacity: 0;
+            }
+
+            .nav-links li:hover {
+                /* color: yellow; */
+                text-decoration: underline;
+            }
+            .nav-links li.fade-in {
+                opacity: 1;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="hamburger">
+            <div class="line1"></div>
+            <div class="line2"></div>
+            <div class="line3"></div>
+        </div>
+        <div class="open-nav">
+            <ul class="nav-links">
+                <li>Home</li>
+                <li>About</li>
+                <li>Clients</li>
+                <li>Contacts</li>
+            </ul>
+        </div>
+        <div class="navBar">
+            <div class="nav-container">
+                <div class="logo">LOGO</div>
+            </div>
+        </div>
+
+        <script>
+            const hamburger = document.querySelector(".hamburger");
+            const navLinks = document.querySelector(".nav-links");
+            const links = document.querySelectorAll(".nav-links li");
+            const navBar = document.querySelector(".navBar");
+
+            hamburger.addEventListener("click", () => {
+                navBar.classList.toggle("displayNone");
+                navLinks.classList.toggle("open");
+                links.forEach((link) => {
+                    link.classList.toggle("fade-in");
+                });
+
+                hamburger.classList.toggle("toggle");
+            });
+        </script>
+    </body>
+</html>
